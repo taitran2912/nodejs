@@ -3,14 +3,20 @@ const path = require('path')
 const morgan = require('morgan')
 const { engine } = require('express-handlebars')
 
+const routes = require('./routes')
+
 const app = express()
 const port = 3000
 
 app.use(express.static(path.join(__dirname, 'public'))) 
 
-// Http logger
-app.use(morgan('combined'))
+app.use(express.urlencoded({
+  extended: true
+}))
+app.use(express.json())
 
+// Http logger
+// app.use(morgan('combined'))
 
 // Teamplate engine setup
 app.engine('hbs', engine(
@@ -20,17 +26,11 @@ app.engine('hbs', engine(
 ))
 app.set('view engine', 'hbs')
 
-
 // Static files
 app.set('views', path.join(__dirname, 'resources/view'))
 
-app.get('/', (req, res) => {
-    res.render('home')
-})
-
-app.get('/tin-tuc', (req, res) => {
-    res.render('news')
-})
+// Routes init
+routes(app)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
