@@ -29,8 +29,8 @@ app.engine(
 );
 app.set('view engine', 'hbs');
 
-// Static files
-                                                                                                                                                              app.set('views', path.join(__dirname, 'resources/view'));
+// Static files                                                                                                                                                              
+                                                                app.set('views', path.join(__dirname, 'resources/view'));
 
 // Routes init
 routes(app);
