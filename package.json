@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
+    "prettier": "lint-staged",
     "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "sass src/resources/scss/app.scss src/public/css/app.css --watch"
@@ -22,7 +23,7 @@
   "homepage": "https://github.com/taitran2912/nodejs#readme",
   "description": "",
   "lint-staged": {
-    "src/**/*.{js, json, scss}": "prettier --single-quote --traling-comma all --tab-width 4 --write"
+    "src/**/*.{js, json, scss}": "prettier --write --single-quote --trailing-comma all --tab-width 4"
   },
   "husky": {
     "hooks": {
@@ -35,7 +36,7 @@
     "sass": "^1.89.2"
   },
   "devDependencies": {
-    "husky": "^9.1.7",
+    "husky": "^8.0.3",
     "lint-staged": "^16.1.2",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.10",
