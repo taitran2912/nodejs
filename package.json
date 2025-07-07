@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "prettier": "lint-staged",
     "start": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "sass src/resources/scss/app.scss src/public/css/app.css --watch"
@@ -26,6 +25,11 @@
     "src/**/*.{js, json, scss}": [
       "prettier --single-quote --tralling-comma all --tab-width 4 --write"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "dependencies": {
     "express": "^5.1.0",
