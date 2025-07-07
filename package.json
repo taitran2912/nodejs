@@ -22,9 +22,7 @@
   "homepage": "https://github.com/taitran2912/nodejs#readme",
   "description": "",
   "lint-staged": {
-    "src/**/*.{js, json, scss}": [
-      "prettier --single-quote --tralling-comma all --tab-width 4 --write"
-    ]
+    "src/**/*.{js, json, scss}": "prettier --single-quote --tralling-comma all --tab-width 4 --write"
   },
   "husky": {
     "hooks": {
