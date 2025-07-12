@@ -35,6 +35,26 @@ class CourseController {
                 }
             });
     }
+    // [GET] /courses/:id/edit
+    edit(req, res, next) {
+        Course.findById(req.params.id)
+            .then((course) => {
+                res.render('course/edit', {
+                    course: mongooseToObject(course),
+                });
+            })
+            .catch(next);
+    }
+
+    // [PUT] /courses/:id
+    update(req, res, next) {
+        const formData = req.body;
+        formData.Image = `https://img.youtube.com/vi/${req.body.VideoId}/sddefault.jpg`;
+
+        Course.updateOne({ _id: req.params.id }, formData)
+            .then(() => res.redirect('/me/store/course'))
+            .catch(next);
+    }
 }
 
 module.exports = new CourseController();
