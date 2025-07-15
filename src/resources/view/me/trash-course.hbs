@@ -1,6 +1,6 @@
 <div class="mt-4">
-    <h1>My course</h1>
-    <a href="/me/trash/course">Thung rac</a>
+    <h1>My course trashed</h1>
+    <a href="/me/store/course">Quay lai</a>
 
     <table class="table mt-4">
         <thead>
@@ -19,7 +19,7 @@
                     <td>{{this.Level}}</td>
                     <td>{{this.createdAt}}</td>
                     <td>
-                        <a href="/course/{{this._id}}/edit" class="btn btn-link">Edit</a>
+                        <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Restore</a>
                         <a href="/course/{{this._id}}/delete" class="btn btn-link" data-id="{{this._id}}" data-toggle="modal" data-target="#delete-course-model">Delete</a>
                     </td>
                 </tr>
@@ -28,12 +28,12 @@
                 <tr>
                     <td colspan="5" class="text-center">
                       No courses found <br>
-                      <a href="/course/create" class="btn btn-primary">Create new course</a>
+                      {{!-- <a href="/course/create" class="btn btn-primary">Create new course</a> --}}
                     </td>
                     
                 </tr>
                 
-            {{/each}}
+            {{/each}} 
         </tbody>
     </table>
 </div>
@@ -62,12 +62,18 @@
 {{!-- Delete hidden form --}}
 <form name="delete-course-form" method="POST"></form>
 
+<form name="restore-course-form" method="POST"></form>
+
+
 {{!--  --}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var courseId
         var deleteForm = document.forms['delete-course-form']
         var btnDelete = document.getElementById('btn-delete-course')
+        var btnRestore = $('.btn-restore')
+        var restoreForm = document.forms['restore-course-form']
+
 
         //when dialog confirm clicked
         $('#delete-course-model').on('show.bs.modal', function (event) {
@@ -78,8 +84,15 @@
         //when delete button clicked
         btnDelete.onclick = function(){
             //alert(courseId)
-            deleteForm.action = '/course/' + courseId + '?_method=DELETE'// add action method in form line 52
+            deleteForm.action = '/course/' + courseId + '/force?_method=DELETE'// add action method in form line 52
             deleteForm.submit()//submit the form
         }
+
+        btnRestore.click(function(e){
+            e.preventDefault()
+            var restoreId = $(this).data('id')
+            restoreForm.action = '/course/' + restoreId + '/restore?_method=PATCH'// add action method in form line 52
+            restoreForm.submit()
+        })
     });
 </script>
