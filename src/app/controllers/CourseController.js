@@ -76,6 +76,20 @@ class CourseController {
             .then(() => res.redirect('/me/trash/course'))
             .catch(next);
     }
+
+    // [POST] /courses/handle-action
+    handleAction(req, res, next) {
+        switch (req.body.action) {
+            case 'Delete':
+                Course.delete({ _id: { $in: req.body.courseIds } }) // _id: { $in: req.body.courseIds } lay theo mang
+                    .then(() => res.redirect('/me/store/course'))
+                    .catch(next);
+                break;
+            default:
+                res.status(400).send('Invalid action');
+                break;
+        }
+    }
 }
 
 module.exports = new CourseController();
