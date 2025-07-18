@@ -8,7 +8,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Level</th>
-                <th scope="col" colspan="2">Create time</th>
+                <th scope="col" colspan="2">Delete time</th>
             </tr>
         </thead>
         <tbody>
@@ -17,7 +17,7 @@
                     <th scope="row">{{sum @index 1}}</th>
                     <td>{{this.Name}}</td>
                     <td>{{this.Level}}</td>
-                    <td>{{this.createdAt}}</td>
+                    <td>{{this.deletedAt}}</td>
                     <td>
                         <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Restore</a>
                         <a href="/course/{{this._id}}/delete" class="btn btn-link" data-id="{{this._id}}" data-toggle="modal" data-target="#delete-course-model">Delete</a>
@@ -28,11 +28,8 @@
                 <tr>
                     <td colspan="5" class="text-center">
                       No courses found <br>
-                      {{!-- <a href="/course/create" class="btn btn-primary">Create new course</a> --}}
                     </td>
-                    
                 </tr>
-                
             {{/each}} 
         </tbody>
     </table>
