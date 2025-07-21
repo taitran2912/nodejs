@@ -1,7 +1,6 @@
 <form name="container-form" method="POST" class="mt-4" action="/course/handle-action">
     <h1>My course</h1>
     <a href="/me/trash/course">Thung rac ({{deleteCount}})</a>
-
     <div class="mt-4 d-flex align-items-center">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
@@ -15,7 +14,7 @@
         <option value="Delete">Delete</option>
       </select>
 
-      <button class="btn btn-primary btn-sm btn-submit disabled">Submit</button>
+      <button class="btn btn-primary btn-sm btn-submit" disabled="disabled">Submit</button>
 
     </div>
 
@@ -122,24 +121,15 @@
             renderCheckAllSubmitBTN()
         })
 
-        //checked on submit button
-        btnSubmit.on('submit', function (e) {
-          var isSubmittable = !$(this).hasClass('disabled')
-          if (!isSubmittable) {
-            e.preventDefault()
-          }
-        })
-
         //re-render check all submit button
         function renderCheckAllSubmitBTN(){
           var checkedCount = $('input[name="courseIds[]"]:checked').length
           if(checkedCount > 0){
-            btnSubmit.removeClass('disabled')
+            btnSubmit.attr('disabled', false)
           }else{
-            btnSubmit.addClass('disabled')
+            btnSubmit.attr('disabled', true)
         }
         }
 
-        
     });
 </script>
