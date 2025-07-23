@@ -42,4 +42,15 @@ Course.plugin(mongooseDelete, {
     overrideMethods: 'all',
 });
 
+// custom query helpers
+Course.query.sortable = function (req) {
+    if (Object.prototype.hasOwnProperty.call(req.query, '_sort')) {
+        const isValidtype = ['asc', 'desc'].includes(req.query.type);
+        return this.sort({
+            [req.query.column]: isValidtype ? req.query.type : 'desc',
+        });
+    }
+    return this;
+};
+
 module.exports = mongoose.model('Course', Course);

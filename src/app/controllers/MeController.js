@@ -5,7 +5,7 @@ class MeController {
     // [GET] /me/store/course
     storedCourse(req, res, next) {
         Promise.all([
-            Course.find(),
+            Course.find().sortable(req),
             Course.countDocumentsWithDeleted({ deleted: true }),
         ])
             .then(([courses, deleteCount]) =>
@@ -28,5 +28,4 @@ class MeController {
             .catch(next);
     }
 }
-
 module.exports = new MeController();

@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const methodOverride = require('method-override');
 
+const sortMiddleware = require('./app/middleware/SortMiddleware');
+
 const routes = require('./routes');
 const db = require('./config/db');
 
@@ -28,14 +30,15 @@ app.use(morgan('combined'));
 // Method override
 app.use(methodOverride('_method'));
 
+// Custom middleware
+app.use(sortMiddleware);
+
 // Teamplate engine setup
 app.engine(
     'hbs',
     engine({
         extname: '.hbs',
-        helpers: {
-            sum: (a, b) => a + b,
-        },
+        helpers: require('./helpers/handlebars'),
     }),
 );
 app.set('view engine', 'hbs');
